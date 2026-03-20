@@ -74,12 +74,14 @@ def _build_chat_prompt(context_docs: List[Dict], symptoms: str) -> str:
 
     system_msg = (
         "You are a medical knowledge assistant. Based on the retrieved disease "
-        "information below, provide a clear, concise explanation of the most "
-        "likely conditions matching the patient's symptoms. "
-        "For each condition: briefly explain why the symptoms match, "
-        "list the key precautions, and state the risk level. "
-        "Keep the response under 300 words. "
-        "End with a reminder to consult a doctor."
+        "information below, provide a clear, concise analysis. "
+        "Structure your response as follows:\n"
+        "1. State the most likely condition and why the symptoms match.\n"
+        "2. Briefly mention other possible conditions if relevant.\n"
+        "3. List the top 3-4 precautions the patient should take.\n"
+        "4. State the risk level and whether urgent care is recommended.\n"
+        "Keep the response under 250 words. Use simple, patient-friendly language. "
+        "End with: 'Please consult a healthcare professional for proper diagnosis.'"
     )
 
     user_msg = (
@@ -113,8 +115,13 @@ def template_fallback(context_docs: List[Dict], symptoms: str) -> str:
     """
     if not context_docs:
         return (
-            "No matching conditions were found for the reported symptoms. "
-            "Please try describing your symptoms differently or consult a healthcare provider."
+            "No matching conditions were found for the reported symptoms.\n\n"
+            "Suggestions:\n"
+            "  - Try describing your symptoms in more detail\n"
+            "  - Use common medical terms (e.g., 'fever' instead of 'feeling hot')\n"
+            "  - List multiple symptoms separated by commas\n\n"
+            "If symptoms persist, please consult a healthcare provider.\n\n"
+            + MEDICAL_DISCLAIMER
         )
 
     lines = []
@@ -262,6 +269,7 @@ def _postprocess_response(response: str) -> str:
     Clean up LLM-generated response.
     - Remove incomplete trailing sentences
     - Strip excessive whitespace
+    - Remove repeated sections
 
     Args:
         response: Raw LLM output string
@@ -274,6 +282,18 @@ def _postprocess_response(response: str) -> str:
 
     # Strip whitespace
     response = response.strip()
+
+    # Remove any repeated lines
+    lines = response.split('\n')
+    seen = set()
+    unique_lines = []
+    for line in lines:
+        stripped = line.strip()
+        if stripped and stripped in seen:
+            continue
+        seen.add(stripped)
+        unique_lines.append(line)
+    response = '\n'.join(unique_lines)
 
     # If response ends mid-sentence, cut at the last complete sentence
     if response and response[-1] not in '.!?':
