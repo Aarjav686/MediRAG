@@ -218,10 +218,10 @@ def rerank_results(
     severity_weight: float = 0.15,
 ) -> List[Dict]:
     """
-    Re-rank retrieved results using a combination of:
-    1. Vector similarity score (from FAISS)
-    2. Symptom overlap score (keyword matching)
-    3. Severity score (normalized)
+    Hybrid Search: Re-rank retrieved results using a combination of:
+    1. Vector similarity score (from FAISS embeddings)
+    2. Symptom overlap score (exact keyword matching / Jaccard similarity)
+    3. Severity score (normalized risk factor)
     
     Args:
         results: List of (document, similarity_score) from FAISS search

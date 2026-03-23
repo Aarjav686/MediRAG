@@ -9,6 +9,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.rag_pipeline import RAGPipeline
 from src.preprocessing import get_all_symptoms
 from src.llm import MEDICAL_DISCLAIMER
+from datetime import datetime
+import csv
 
 # Configure Streamlit page
 st.set_page_config(
@@ -126,6 +128,26 @@ if analyze_button:
             risk_level = result.get("risk_level", "Unknown")
             explanation = result.get("explanation", "")
             
+            # --- Query Logging (Commit 19) ---
+            os.makedirs("logs", exist_ok=True)
+            log_file = os.path.join("logs", "query_log.csv")
+            log_exists = os.path.exists(log_file)
+            top_disease = predictions[0]['disease'] if predictions else "Unknown"
+            top_confidence = predictions[0]['confidence'] if predictions else 0.0
+            
+            with open(log_file, "a", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                if not log_exists:
+                    writer.writerow(["Timestamp", "User Input", "Top Prediction", "Confidence", "Risk Level"])
+                writer.writerow([
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    user_input,
+                    top_disease,
+                    f"{top_confidence:.4f}",
+                    risk_level
+                ])
+            # ---------------------------------
+            
             st.markdown("---")
             st.header("Analysis Results")
             
@@ -192,6 +214,25 @@ if analyze_button:
                             st.write("No specific precautions listed.")
                             
                         st.markdown("</div>", unsafe_allow_html=True)
+                
+                # --- Disease Comparison Table (Commit 18) ---
+                st.markdown("### Disease Comparison")
+                st.write("Side-by-side comparison of the top potential matches:")
+                
+                comparison_data = []
+                for p in predictions:
+                    matched_symp = [s.replace("_", " ").title() for s in p.get("symptoms", [])]
+                    comparison_data.append({
+                        "Condition": p["disease"],
+                        "Confidence (%)": f"{p.get('confidence', 0) * 100:.1f}%",
+                        "Risk Level": p.get("risk_level", "Unknown"),
+                        "Severity Score": p.get("severity_score", 0),
+                        "Overlapping Symptoms": ", ".join(matched_symp[:5]) + ("..." if len(matched_symp) > 5 else "")
+                    })
+                
+                df_comparison = pd.DataFrame(comparison_data)
+                # Display without index
+                st.dataframe(df_comparison, use_container_width=True, hide_index=True)
 
 # -----------------------------------------------------------------------------
 # Footer / Disclaimer

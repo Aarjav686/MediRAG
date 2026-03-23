@@ -1,119 +1,100 @@
-# 🏥 MediRAG - Symptom to Disease Knowledge Assistant
+# 🏥 MediRAG: Symptom-to-Disease AI Assistant
 
-A local AI system that predicts possible diseases based on user-entered symptoms using **Retrieval Augmented Generation (RAG)** with a medical dataset and a locally running open-source LLM.
+**MediRAG** is a local, privacy-first Retrieval-Augmented Generation (RAG) medical assistant. It predicts potential diseases based on user-entered symptoms using a FAISS vector database and optionally generates human-readable explanations using a local HuggingFace LLM (TinyLlama).
 
-> ⚠️ **Disclaimer**: This system is for educational purposes only and does not replace professional medical advice.
+![MediRAG Project](https://img.shields.io/badge/Status-Complete-success) ![Python](https://img.shields.io/badge/Python-3.9%2B-blue) ![Streamlit](https://img.shields.io/badge/Streamlit-UI-red)
+
+---
+
+## 🚀 Features
+
+- **Hybrid Retrieval System**: Combines FAISS dense vector similarity with exact symptom keyword overlap for highly accurate disease matching.
+- **Severity Scoring**: Automatically calculates Risk Levels (Low, Moderate, High, Critical) based on the severity of matched conditions.
+- **Local AI Explanations**: Uses `TinyLlama-1.1B-Chat` entirely locally to summarize conditions and suggest precautions. No external APIs required.
+- **Template Fallback Mode**: A lightning-fast, zero-LLM fallback mode that guarantees operation even on low-memory systems.
+- **Interactive Streamlit UI**: A clean, modern frontend with confidence tracking, risk alerts, and side-by-side disease comparison tables.
+- **Query Logging**: Automatically logs all searches to `logs/query_log.csv` for auditing and future model tuning.
+
+---
 
 ## 🏗️ Architecture
 
+Below is the workflow of the MediRAG pipeline:
+
 ```mermaid
-graph LR
-    A[User Input<br/>Symptoms] --> B[Query<br/>Preprocessing]
-    B --> C[Embedding<br/>Generation]
-    C --> D[FAISS<br/>Vector Search]
-    D --> E[Re-ranking &<br/>Scoring]
-    E --> F[Context<br/>Construction]
-    F --> G[TinyLlama<br/>LLM Generation]
-    G --> H[Structured<br/>Output]
+graph TD
+    A[User Input: Symptoms] --> B[Streamlit UI]
+    B --> C(Preprocessing & Normalization)
     
-    I[(Medical<br/>Dataset)] --> J[Document<br/>Creation]
-    J --> K[Embedding<br/>& Indexing]
-    K --> D
+    subgraph "Retrieval Pipeline (Hybrid)"
+        C --> D[Generate Query Embedding]
+        D --> E[(FAISS Vector Database)]
+        E --> F[Top-K Candidates]
+        C --> G[Extract Keywords]
+        G --> H{Re-Ranger}
+        F --> H
+        H --> I[Vector Score + Jaccard Overlap + Severity]
+        I --> J[Top-N Predictions]
+    end
+    
+    subgraph "Generation Pipeline"
+        J --> K{LLM Enabled?}
+        K -- Yes --> L[TinyLlama Prompt Injection]
+        L --> M[LLM Generates Explanation]
+        K -- No --> N[Template Fallback Generator]
+        N --> O[Structured Explanation]
+        M --> O
+    end
+    
+    O --> P[Final Output to UI]
+    P --> Q[Log Query to CSV]
 ```
 
-## 📊 Dataset
+---
 
-The system uses a Kaggle medical dataset containing **~42 diseases** with:
-- **Training data**: Symptom-disease associations (binary matrix + named symptoms)
-- **Disease descriptions**: Medical descriptions for each disease
-- **Precautions**: Recommended precautions per disease (up to 4 each)
-- **Symptom severity**: Severity scores (1-7) for 135 symptoms
+## ⚙️ Installation & Setup
 
-## 🛠️ Technology Stack
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Aarjav686/MediRAG.git
+   cd MediRAG
+   ```
 
-| Component | Technology |
-|-----------|------------|
-| Language | Python 3.10+ |
-| Embeddings | sentence-transformers/all-MiniLM-L6-v2 |
-| Vector DB | FAISS (faiss-cpu) |
-| Local LLM | TinyLlama/TinyLlama-1.1B-Chat-v1.0 |
-| UI | Streamlit |
-| ML | scikit-learn, numpy, pandas |
+2. **Set up a Virtual Environment (Recommended)**
+   ```bash
+   python -m venv .venv
+   # Windows:
+   .venv\Scripts\activate
+   # Mac/Linux:
+   source .venv/bin/activate
+   ```
 
-## 📁 Project Structure
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```
-MediRAG/
-├── data/                    # Dataset CSV files
-│   ├── Training.csv
-│   ├── dataset.csv
-│   ├── disease_description.csv
-│   ├── disease_precaution.csv
-│   └── symptom_severity.csv
-├── src/                     # Source modules
-│   ├── data_loader.py       # CSV loading utilities
-│   ├── preprocessing.py     # Data merging & document creation
-│   ├── embeddings.py        # Embedding generation
-│   ├── vector_store.py      # FAISS index management
-│   ├── retriever.py         # Similarity search & re-ranking
-│   ├── llm.py               # Local LLM integration
-│   └── rag_pipeline.py      # Full RAG orchestration
-├── app/
-│   └── app.py               # Streamlit web interface
-├── tests/                   # Unit tests
-├── requirements.txt
-└── README.md
-```
+4. **Build the Vector Database**
+   Before running the app, you need to preprocess the datasets and build the FAISS index:
+   ```bash
+   python -m src.vector_store
+   ```
+   *This will generate embeddings for all diseases and save them to the `faiss_index/` directory.*
 
-## 🚀 Quick Start
+---
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/Aarjav686/MediRAG.git
-cd MediRAG
-```
+## 🖥️ Running the Application
 
-### 2. Create virtual environment
-```bash
-python -m venv .venv
-.venv\Scripts\activate   # Windows
-# source .venv/bin/activate  # Linux/Mac
-```
+Launch the Streamlit web interface:
 
-### 3. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run the application
 ```bash
 streamlit run app/app.py
 ```
 
-## 💡 Usage
+The app will open in your default browser at `http://localhost:8501`. 
+*Note: The first search might take a moment as the ML models are loaded into memory.*
 
-Enter symptoms as text in the input field:
-```
-fever headache joint pain
-```
+---
 
-The system will:
-1. **Retrieve** the most relevant diseases from the knowledge base
-2. **Rank** them by confidence score
-3. **Generate** an AI explanation using the local LLM
-4. **Display** precautions and severity information
-
-## 🔧 Features
-
-- ✅ Symptom similarity retrieval using FAISS
-- ✅ Disease ranking with confidence scores
-- ✅ LLM-powered explanation generation
-- ✅ Disease precautions from dataset
-- ✅ Severity scoring integration
-- ✅ Streamlit web interface
-- ✅ Medical disclaimer
-- ✅ 100% local execution — no external APIs
-
-## 📝 License
-
-This project is for educational purposes as part of an academic assignment.
+## ⚖️ Disclaimer
+**MediRAG is a demonstration tool and does not provide actual medical advice.** All predictions are based on an open-source dataset. If you are experiencing a medical emergency or severe symptoms, please consult a qualified healthcare professional immediately.
