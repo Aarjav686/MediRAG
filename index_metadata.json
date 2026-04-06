@@ -1,0 +1,918 @@
+{
+  "embedding_dim": 384,
+  "num_documents": 42,
+  "documents": [
+    {
+      "disease": "AIDS",
+      "symptoms": [
+        "extra_marital_contacts",
+        "high_fever",
+        "muscle_wasting",
+        "patches_in_throat"
+      ],
+      "description": "Acquired immunodeficiency syndrome (AIDS) is a chronic, potentially life-threatening condition caused by the human immunodeficiency virus (HIV). By damaging your immune system, HIV interferes with your body's ability to fight infection and disease.",
+      "precautions": [
+        "avoid open cuts",
+        "wear ppe if possible",
+        "consult doctor",
+        "follow up"
+      ],
+      "severity_score": 5.25,
+      "text": "Disease: AIDS\nSymptoms: extra marital contacts, high fever, muscle wasting, patches in throat\nDescription: Acquired immunodeficiency syndrome (AIDS) is a chronic, potentially life-threatening condition caused by the human immunodeficiency virus (HIV). By damaging your immune system, HIV interferes with your body's ability to fight infection and disease.\nPrecautions: avoid open cuts, wear ppe if possible, consult doctor, follow up\nAverage Severity Score: 5.25"
+    },
+    {
+      "disease": "Acne",
+      "symptoms": [
+        "blackheads",
+        "pus_filled_pimples",
+        "scurrying",
+        "skin_rash"
+      ],
+      "description": "Acne vulgaris is the formation of comedones, papules, pustules, nodules, and/or cysts as a result of obstruction and inflammation of pilosebaceous units (hair follicles and their accompanying sebaceous gland). Acne develops on the face and upper trunk. It most often affects adolescents.",
+      "precautions": [
+        "bath twice",
+        "avoid fatty spicy food",
+        "drink plenty of water",
+        "avoid too many products"
+      ],
+      "severity_score": 2.25,
+      "text": "Disease: Acne\nSymptoms: blackheads, pus filled pimples, scurrying, skin rash\nDescription: Acne vulgaris is the formation of comedones, papules, pustules, nodules, and/or cysts as a result of obstruction and inflammation of pilosebaceous units (hair follicles and their accompanying sebaceous gland). Acne develops on the face and upper trunk. It most often affects adolescents.\nPrecautions: bath twice, avoid fatty spicy food, drink plenty of water, avoid too many products\nAverage Severity Score: 2.25"
+    },
+    {
+      "disease": "Alcoholic hepatitis",
+      "symptoms": [
+        "abdominal_pain",
+        "distention_of_abdomen",
+        "fluid_overload",
+        "history_of_alcohol_consumption",
+        "swelling_of_stomach",
+        "vomiting",
+        "yellowish_skin"
+      ],
+      "description": "Alcoholic hepatitis is a diseased, inflammatory condition of the liver caused by heavy alcohol consumption over an extended period. It's also aggravated by binge drinking and ongoing alcohol use. If you develop this condition, you must stop drinking alcohol",
+      "precautions": [
+        "stop alcohol consumption",
+        "consult doctor",
+        "medication",
+        "follow up"
+      ],
+      "severity_score": 4.57,
+      "text": "Disease: Alcoholic hepatitis\nSymptoms: abdominal pain, distention of abdomen, fluid overload, history of alcohol consumption, swelling of stomach, vomiting, yellowish skin\nDescription: Alcoholic hepatitis is a diseased, inflammatory condition of the liver caused by heavy alcohol consumption over an extended period. It's also aggravated by binge drinking and ongoing alcohol use. If you develop this condition, you must stop drinking alcohol\nPrecautions: stop alcohol consumption, consult doctor, medication, follow up\nAverage Severity Score: 4.57"
+    },
+    {
+      "disease": "Allergy",
+      "symptoms": [
+        "chills",
+        "continuous_sneezing",
+        "shivering",
+        "watering_from_eyes"
+      ],
+      "description": "An allergy is an immune system response to a foreign substance that's not typically harmful to your body.They can include certain foods, pollen, or pet dander. Your immune system's job is to keep you healthy by fighting harmful pathogens.",
+      "precautions": [
+        "apply calamine",
+        "cover area with bandage",
+        "use ice to compress itching"
+      ],
+      "severity_score": 4.0,
+      "text": "Disease: Allergy\nSymptoms: chills, continuous sneezing, shivering, watering from eyes\nDescription: An allergy is an immune system response to a foreign substance that's not typically harmful to your body.They can include certain foods, pollen, or pet dander. Your immune system's job is to keep you healthy by fighting harmful pathogens.\nPrecautions: apply calamine, cover area with bandage, use ice to compress itching\nAverage Severity Score: 4.0"
+    },
+    {
+      "disease": "Arthritis",
+      "symptoms": [
+        "movement_stiffness",
+        "muscle_weakness",
+        "painful_walking",
+        "stiff_neck",
+        "swelling_joints"
+      ],
+      "description": "Arthritis is the swelling and tenderness of one or more of your joints. The main symptoms of arthritis are joint pain and stiffness, which typically worsen with age. The most common types of arthritis are osteoarthritis and rheumatoid arthritis.",
+      "precautions": [
+        "exercise",
+        "use hot and cold therapy",
+        "try acupuncture",
+        "massage"
+      ],
+      "severity_score": 3.6,
+      "text": "Disease: Arthritis\nSymptoms: movement stiffness, muscle weakness, painful walking, stiff neck, swelling joints\nDescription: Arthritis is the swelling and tenderness of one or more of your joints. The main symptoms of arthritis are joint pain and stiffness, which typically worsen with age. The most common types of arthritis are osteoarthritis and rheumatoid arthritis.\nPrecautions: exercise, use hot and cold therapy, try acupuncture, massage\nAverage Severity Score: 3.6"
+    },
+    {
+      "disease": "Bronchial Asthma",
+      "symptoms": [
+        "breathlessness",
+        "cough",
+        "family_history",
+        "fatigue",
+        "high_fever",
+        "mucoid_sputum"
+      ],
+      "description": "Bronchial asthma is a medical condition which causes the airway path of the lungs to swell and narrow. Due to this swelling, the air path produces excess mucus making it hard to breathe, which results in coughing, short breath, and wheezing. The disease is chronic and interferes with daily working.",
+      "precautions": [
+        "switch to loose cloth",
+        "take deep breaths",
+        "get away from the trigger",
+        "seek help"
+      ],
+      "severity_score": 4.67,
+      "text": "Disease: Bronchial Asthma\nSymptoms: breathlessness, cough, family history, fatigue, high fever, mucoid sputum\nDescription: Bronchial asthma is a medical condition which causes the airway path of the lungs to swell and narrow. Due to this swelling, the air path produces excess mucus making it hard to breathe, which results in coughing, short breath, and wheezing. The disease is chronic and interferes with daily working.\nPrecautions: switch to loose cloth, take deep breaths, get away from the trigger, seek help\nAverage Severity Score: 4.67"
+    },
+    {
+      "disease": "Cervical spondylosis",
+      "symptoms": [
+        "back_pain",
+        "dizziness",
+        "loss_of_balance",
+        "neck_pain",
+        "weakness_in_limbs"
+      ],
+      "description": "Cervical spondylosis is a general term for age-related wear and tear affecting the spinal disks in your neck. As the disks dehydrate and shrink, signs of osteoarthritis develop, including bony projections along the edges of bones (bone spurs).",
+      "precautions": [
+        "use a heating pad or cold pack",
+        "exercise",
+        "take an otc pain reliever",
+        "consult a doctor"
+      ],
+      "severity_score": 4.6,
+      "text": "Disease: Cervical spondylosis\nSymptoms: back pain, dizziness, loss of balance, neck pain, weakness in limbs\nDescription: Cervical spondylosis is a general term for age-related wear and tear affecting the spinal disks in your neck. As the disks dehydrate and shrink, signs of osteoarthritis develop, including bony projections along the edges of bones (bone spurs).\nPrecautions: use a heating pad or cold pack, exercise, take an otc pain reliever, consult a doctor\nAverage Severity Score: 4.6"
+    },
+    {
+      "disease": "Chicken pox",
+      "symptoms": [
+        "fatigue",
+        "headache",
+        "high_fever",
+        "itching",
+        "lethargy",
+        "loss_of_appetite",
+        "malaise",
+        "mild_fever",
+        "red_spots_over_body",
+        "skin_rash",
+        "swelled_lymph_nodes"
+      ],
+      "description": "Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash. The rash first appears on the chest, back, and face, and then spreads over the entire body, causing between 250 and 500 itchy blisters.",
+      "precautions": [
+        "use neem in bathing",
+        "consume neem leaves",
+        "take the vaccine",
+        "avoid public places"
+      ],
+      "severity_score": 4.0,
+      "text": "Disease: Chicken pox\nSymptoms: fatigue, headache, high fever, itching, lethargy, loss of appetite, malaise, mild fever, red spots over body, skin rash, swelled lymph nodes\nDescription: Chickenpox is a highly contagious disease caused by the varicella-zoster virus (VZV). It can cause an itchy, blister-like rash. The rash first appears on the chest, back, and face, and then spreads over the entire body, causing between 250 and 500 itchy blisters.\nPrecautions: use neem in bathing, consume neem leaves, take the vaccine, avoid public places\nAverage Severity Score: 4.0"
+    },
+    {
+      "disease": "Chronic cholestasis",
+      "symptoms": [
+        "abdominal_pain",
+        "itching",
+        "loss_of_appetite",
+        "nausea",
+        "vomiting",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "Chronic cholestatic diseases, whether occurring in infancy, childhood or adulthood, are characterized by defective bile acid transport from the liver to the intestine, which is caused by primary damage to the biliary epithelium in most cases",
+      "precautions": [
+        "cold baths",
+        "anti itch medicine",
+        "consult doctor",
+        "eat healthy"
+      ],
+      "severity_score": 3.71,
+      "text": "Disease: Chronic cholestasis\nSymptoms: abdominal pain, itching, loss of appetite, nausea, vomiting, yellowing of eyes, yellowish skin\nDescription: Chronic cholestatic diseases, whether occurring in infancy, childhood or adulthood, are characterized by defective bile acid transport from the liver to the intestine, which is caused by primary damage to the biliary epithelium in most cases\nPrecautions: cold baths, anti itch medicine, consult doctor, eat healthy\nAverage Severity Score: 3.71"
+    },
+    {
+      "disease": "Common Cold",
+      "symptoms": [
+        "chest_pain",
+        "chills",
+        "congestion",
+        "continuous_sneezing",
+        "cough",
+        "fatigue",
+        "headache",
+        "high_fever",
+        "loss_of_smell",
+        "malaise",
+        "muscle_pain",
+        "phlegm",
+        "redness_of_eyes",
+        "runny_nose",
+        "sinus_pressure",
+        "swelled_lymph_nodes",
+        "throat_irritation"
+      ],
+      "description": "The common cold is a viral infection of your nose and throat (upper respiratory tract). It's usually harmless, although it might not feel that way. Many types of viruses can cause a common cold.",
+      "precautions": [
+        "drink vitamin c rich drinks",
+        "take vapour",
+        "avoid cold food",
+        "keep fever in check"
+      ],
+      "severity_score": 4.53,
+      "text": "Disease: Common Cold\nSymptoms: chest pain, chills, congestion, continuous sneezing, cough, fatigue, headache, high fever, loss of smell, malaise, muscle pain, phlegm, redness of eyes, runny nose, sinus pressure, swelled lymph nodes, throat irritation\nDescription: The common cold is a viral infection of your nose and throat (upper respiratory tract). It's usually harmless, although it might not feel that way. Many types of viruses can cause a common cold.\nPrecautions: drink vitamin c rich drinks, take vapour, avoid cold food, keep fever in check\nAverage Severity Score: 4.53"
+    },
+    {
+      "disease": "Covid",
+      "symptoms": [
+        "cough",
+        "high_fever",
+        "loss_of_smell",
+        "loss_of_taste",
+        "tiredness"
+      ],
+      "description": "COVID-19 (Corona Virus) affects different people in different ways. It affects the lungs. Most infected people will develop mild to moderate illness and recover without hospitalization.",
+      "precautions": [
+        "cover mouth",
+        "social distancing",
+        "wear mask",
+        "medication"
+      ],
+      "severity_score": 4.8,
+      "text": "Disease: Covid\nSymptoms: cough, high fever, loss of smell, loss of taste, tiredness\nDescription: COVID-19 (Corona Virus) affects different people in different ways. It affects the lungs. Most infected people will develop mild to moderate illness and recover without hospitalization.\nPrecautions: cover mouth, social distancing, wear mask, medication\nAverage Severity Score: 4.8"
+    },
+    {
+      "disease": "Dengue",
+      "symptoms": [
+        "back_pain",
+        "chills",
+        "fatigue",
+        "headache",
+        "high_fever",
+        "joint_pain",
+        "loss_of_appetite",
+        "malaise",
+        "muscle_pain",
+        "nausea",
+        "pain_behind_the_eyes",
+        "red_spots_over_body",
+        "skin_rash",
+        "vomiting"
+      ],
+      "description": "an acute infectious disease caused by a flavivirus (species Dengue virus of the genus Flavivirus), transmitted by aedes mosquitoes, and characterized by headache, severe joint pain, and a rash. — called also breakbone fever, dengue fever.",
+      "precautions": [
+        "drink papaya leaf juice",
+        "avoid fatty spicy food",
+        "keep mosquitos away",
+        "keep hydrated"
+      ],
+      "severity_score": 3.93,
+      "text": "Disease: Dengue\nSymptoms: back pain, chills, fatigue, headache, high fever, joint pain, loss of appetite, malaise, muscle pain, nausea, pain behind the eyes, red spots over body, skin rash, vomiting\nDescription: an acute infectious disease caused by a flavivirus (species Dengue virus of the genus Flavivirus), transmitted by aedes mosquitoes, and characterized by headache, severe joint pain, and a rash. — called also breakbone fever, dengue fever.\nPrecautions: drink papaya leaf juice, avoid fatty spicy food, keep mosquitos away, keep hydrated\nAverage Severity Score: 3.93"
+    },
+    {
+      "disease": "Diabetes",
+      "symptoms": [
+        "blurred_and_distorted_vision",
+        "excessive_hunger",
+        "fatigue",
+        "increased_appetite",
+        "irregular_sugar_level",
+        "lethargy",
+        "obesity",
+        "polyuria",
+        "restlessness",
+        "weight_loss"
+      ],
+      "description": "Diabetes is a disease that occurs when your blood glucose, also called blood sugar, is too high. Blood glucose is your main source of energy and comes from the food you eat. Insulin, a hormone made by the pancreas, helps glucose from food get into your cells to be used for energy.",
+      "precautions": [
+        "have balanced diet",
+        "exercise",
+        "consult doctor",
+        "follow up"
+      ],
+      "severity_score": 4.1,
+      "text": "Disease: Diabetes\nSymptoms: blurred and distorted vision, excessive hunger, fatigue, increased appetite, irregular sugar level, lethargy, obesity, polyuria, restlessness, weight loss\nDescription: Diabetes is a disease that occurs when your blood glucose, also called blood sugar, is too high. Blood glucose is your main source of energy and comes from the food you eat. Insulin, a hormone made by the pancreas, helps glucose from food get into your cells to be used for energy.\nPrecautions: have balanced diet, exercise, consult doctor, follow up\nAverage Severity Score: 4.1"
+    },
+    {
+      "disease": "Dimorphic hemorrhoids(piles)",
+      "symptoms": [
+        "bloody_stool",
+        "constipation",
+        "irritation_in_anus",
+        "pain_during_bowel_movements",
+        "pain_in_anal_region"
+      ],
+      "description": "Hemorrhoids, also spelled haemorrhoids, are vascular structures in the anal canal. In their ... Other names, Haemorrhoids, piles, hemorrhoidal disease .",
+      "precautions": [
+        "avoid fatty spicy food",
+        "consume witch hazel",
+        "warm bath with Epsom salt",
+        "consume aloe vera juice"
+      ],
+      "severity_score": 5.2,
+      "text": "Disease: Dimorphic hemorrhoids(piles)\nSymptoms: bloody stool, constipation, irritation in anus, pain during bowel movements, pain in anal region\nDescription: Hemorrhoids, also spelled haemorrhoids, are vascular structures in the anal canal. In their ... Other names, Haemorrhoids, piles, hemorrhoidal disease .\nPrecautions: avoid fatty spicy food, consume witch hazel, warm bath with Epsom salt, consume aloe vera juice\nAverage Severity Score: 5.2"
+    },
+    {
+      "disease": "Drug Reaction",
+      "symptoms": [
+        "burning_micturition",
+        "itching",
+        "skin_rash",
+        "spotting_urination",
+        "stomach_pain"
+      ],
+      "description": "An adverse drug reaction (ADR) is an injury caused by taking medication. ADRs may occur following a single dose or prolonged administration of a drug or result from the combination of two or more drugs.",
+      "precautions": [
+        "stop irritation",
+        "consult nearest hospital",
+        "stop taking drug",
+        "follow up"
+      ],
+      "severity_score": 4.2,
+      "text": "Disease: Drug Reaction\nSymptoms: burning micturition, itching, skin rash, spotting urination, stomach pain\nDescription: An adverse drug reaction (ADR) is an injury caused by taking medication. ADRs may occur following a single dose or prolonged administration of a drug or result from the combination of two or more drugs.\nPrecautions: stop irritation, consult nearest hospital, stop taking drug, follow up\nAverage Severity Score: 4.2"
+    },
+    {
+      "disease": "Fungal infection",
+      "symptoms": [
+        "dyschromic_patches",
+        "itching",
+        "nodal_skin_eruptions",
+        "skin_rash"
+      ],
+      "description": "In humans, fungal infections occur when an invading fungus takes over an area of the body and is too much for the immune system to handle. Fungi can live in the air, soil, water, and plants. Some fungi live naturally in the human body. Like many microbes, there are helpful fungi and harmful fungi.",
+      "precautions": [
+        "bath twice",
+        "use Detol or neem in bathing water",
+        "keep the infected area dry",
+        "use clean cloths"
+      ],
+      "severity_score": 2.67,
+      "text": "Disease: Fungal infection\nSymptoms: dyschromic patches, itching, nodal skin eruptions, skin rash\nDescription: In humans, fungal infections occur when an invading fungus takes over an area of the body and is too much for the immune system to handle. Fungi can live in the air, soil, water, and plants. Some fungi live naturally in the human body. Like many microbes, there are helpful fungi and harmful fungi.\nPrecautions: bath twice, use Detol or neem in bathing water, keep the infected area dry, use clean cloths\nAverage Severity Score: 2.67"
+    },
+    {
+      "disease": "GERD",
+      "symptoms": [
+        "acidity",
+        "chest_pain",
+        "cough",
+        "stomach_pain",
+        "ulcers_on_tongue",
+        "vomiting"
+      ],
+      "description": "Gastroesophageal reflux disease, or GERD, is a digestive disorder that affects the lower oesophagal sphincter (LES), the ring of muscle between the oesophagus and stomach. Many people, including pregnant women, suffer from heartburn or acid indigestion caused by GERD.",
+      "precautions": [
+        "avoid fatty spicy food",
+        "avoid lying down after eating",
+        "maintain healthy weight",
+        "exercise"
+      ],
+      "severity_score": 4.67,
+      "text": "Disease: GERD\nSymptoms: acidity, chest pain, cough, stomach pain, ulcers on tongue, vomiting\nDescription: Gastroesophageal reflux disease, or GERD, is a digestive disorder that affects the lower oesophagal sphincter (LES), the ring of muscle between the oesophagus and stomach. Many people, including pregnant women, suffer from heartburn or acid indigestion caused by GERD.\nPrecautions: avoid fatty spicy food, avoid lying down after eating, maintain healthy weight, exercise\nAverage Severity Score: 4.67"
+    },
+    {
+      "disease": "Gastroenteritis",
+      "symptoms": [
+        "dehydration",
+        "diarrhoea",
+        "sunken_eyes",
+        "vomiting"
+      ],
+      "description": "Gastroenteritis is an inflammation of the digestive tract, particularly the stomach, and large and small intestines. Viral and bacterial gastroenteritis are intestinal infections associated with symptoms of diarrhea , abdominal cramps, nausea , and vomiting .",
+      "precautions": [
+        "stop eating solid food for while",
+        "try taking small sips of water",
+        "rest",
+        "ease back into eating"
+      ],
+      "severity_score": 4.5,
+      "text": "Disease: Gastroenteritis\nSymptoms: dehydration, diarrhoea, sunken eyes, vomiting\nDescription: Gastroenteritis is an inflammation of the digestive tract, particularly the stomach, and large and small intestines. Viral and bacterial gastroenteritis are intestinal infections associated with symptoms of diarrhea , abdominal cramps, nausea , and vomiting .\nPrecautions: stop eating solid food for while, try taking small sips of water, rest, ease back into eating\nAverage Severity Score: 4.5"
+    },
+    {
+      "disease": "Heart attack",
+      "symptoms": [
+        "breathlessness",
+        "chest_pain",
+        "sweating",
+        "vomiting"
+      ],
+      "description": "The death of heart muscle due to the loss of blood supply. The loss of blood supply is usually caused by a complete blockage of a coronary artery, one of the arteries that supply blood to the heart muscle.",
+      "precautions": [
+        "call an ambulance",
+        "chew aspirin",
+        "keep calm"
+      ],
+      "severity_score": 4.75,
+      "text": "Disease: Heart attack\nSymptoms: breathlessness, chest pain, sweating, vomiting\nDescription: The death of heart muscle due to the loss of blood supply. The loss of blood supply is usually caused by a complete blockage of a coronary artery, one of the arteries that supply blood to the heart muscle.\nPrecautions: call an ambulance, chew aspirin, keep calm\nAverage Severity Score: 4.75"
+    },
+    {
+      "disease": "Hepatitis A",
+      "symptoms": [
+        "abdominal_pain",
+        "dark_urine",
+        "diarrhoea",
+        "joint_pain",
+        "loss_of_appetite",
+        "mild_fever",
+        "muscle_pain",
+        "nausea",
+        "vomiting",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "Hepatitis A is a highly contagious liver infection caused by the hepatitis A virus. The virus is one of several types of hepatitis viruses that cause inflammation and affect your liver's ability to function.",
+      "precautions": [
+        "Consult nearest hospital",
+        "wash hands through",
+        "avoid fatty spicy food",
+        "medication"
+      ],
+      "severity_score": 4.09,
+      "text": "Disease: Hepatitis A\nSymptoms: abdominal pain, dark urine, diarrhoea, joint pain, loss of appetite, mild fever, muscle pain, nausea, vomiting, yellowing of eyes, yellowish skin\nDescription: Hepatitis A is a highly contagious liver infection caused by the hepatitis A virus. The virus is one of several types of hepatitis viruses that cause inflammation and affect your liver's ability to function.\nPrecautions: Consult nearest hospital, wash hands through, avoid fatty spicy food, medication\nAverage Severity Score: 4.09"
+    },
+    {
+      "disease": "Hepatitis B",
+      "symptoms": [
+        "abdominal_pain",
+        "dark_urine",
+        "fatigue",
+        "itching",
+        "lethargy",
+        "loss_of_appetite",
+        "malaise",
+        "receiving_blood_transfusion",
+        "receiving_unsterile_injections",
+        "yellow_urine",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "Hepatitis B is an infection of your liver. It can cause scarring of the organ, liver failure, and cancer. It can be fatal if it isn't treated. It's spread when people come in contact with the blood, open sores, or body fluids of someone who has the hepatitis B virus.",
+      "precautions": [
+        "consult nearest hospital",
+        "vaccination",
+        "eat healthy",
+        "medication"
+      ],
+      "severity_score": 3.58,
+      "text": "Disease: Hepatitis B\nSymptoms: abdominal pain, dark urine, fatigue, itching, lethargy, loss of appetite, malaise, receiving blood transfusion, receiving unsterile injections, yellow urine, yellowing of eyes, yellowish skin\nDescription: Hepatitis B is an infection of your liver. It can cause scarring of the organ, liver failure, and cancer. It can be fatal if it isn't treated. It's spread when people come in contact with the blood, open sores, or body fluids of someone who has the hepatitis B virus.\nPrecautions: consult nearest hospital, vaccination, eat healthy, medication\nAverage Severity Score: 3.58"
+    },
+    {
+      "disease": "Hepatitis C",
+      "symptoms": [
+        "family_history",
+        "fatigue",
+        "loss_of_appetite",
+        "nausea",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "Inflammation of the liver due to the hepatitis C virus (HCV), which is usually spread via blood transfusion (rare), hemodialysis, and needle sticks. The damage hepatitis C does to the liver can lead to cirrhosis and its complications as well as cancer.",
+      "precautions": [
+        "Consult nearest hospital",
+        "vaccination",
+        "eat healthy",
+        "medication"
+      ],
+      "severity_score": 4.17,
+      "text": "Disease: Hepatitis C\nSymptoms: family history, fatigue, loss of appetite, nausea, yellowing of eyes, yellowish skin\nDescription: Inflammation of the liver due to the hepatitis C virus (HCV), which is usually spread via blood transfusion (rare), hemodialysis, and needle sticks. The damage hepatitis C does to the liver can lead to cirrhosis and its complications as well as cancer.\nPrecautions: Consult nearest hospital, vaccination, eat healthy, medication\nAverage Severity Score: 4.17"
+    },
+    {
+      "disease": "Hepatitis D",
+      "symptoms": [
+        "abdominal_pain",
+        "dark_urine",
+        "fatigue",
+        "joint_pain",
+        "loss_of_appetite",
+        "nausea",
+        "vomiting",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "Hepatitis D, also known as the hepatitis delta virus, is an infection that causes the liver to become inflamed. This swelling can impair liver function and cause long-term liver problems, including liver scarring and cancer. The condition is caused by the hepatitis D virus (HDV).",
+      "precautions": [
+        "consult doctor",
+        "medication",
+        "eat healthy",
+        "follow up"
+      ],
+      "severity_score": 4.0,
+      "text": "Disease: Hepatitis D\nSymptoms: abdominal pain, dark urine, fatigue, joint pain, loss of appetite, nausea, vomiting, yellowing of eyes, yellowish skin\nDescription: Hepatitis D, also known as the hepatitis delta virus, is an infection that causes the liver to become inflamed. This swelling can impair liver function and cause long-term liver problems, including liver scarring and cancer. The condition is caused by the hepatitis D virus (HDV).\nPrecautions: consult doctor, medication, eat healthy, follow up\nAverage Severity Score: 4.0"
+    },
+    {
+      "disease": "Hepatitis E",
+      "symptoms": [
+        "abdominal_pain",
+        "acute_liver_failure",
+        "coma",
+        "dark_urine",
+        "fatigue",
+        "high_fever",
+        "joint_pain",
+        "loss_of_appetite",
+        "nausea",
+        "stomach_bleeding",
+        "vomiting",
+        "yellowing_of_eyes",
+        "yellowish_skin"
+      ],
+      "description": "A rare form of liver inflammation caused by infection with the hepatitis E virus (HEV). It is transmitted via food or drinks handled by an infected person or through infected water supplies in areas where the faecal matter may get into the water. Hepatitis E does not cause chronic liver disease.",
+      "precautions": [
+        "stop alcohol consumption",
+        "rest",
+        "consult doctor",
+        "medication"
+      ],
+      "severity_score": 4.77,
+      "text": "Disease: Hepatitis E\nSymptoms: abdominal pain, acute liver failure, coma, dark urine, fatigue, high fever, joint pain, loss of appetite, nausea, stomach bleeding, vomiting, yellowing of eyes, yellowish skin\nDescription: A rare form of liver inflammation caused by infection with the hepatitis E virus (HEV). It is transmitted via food or drinks handled by an infected person or through infected water supplies in areas where the faecal matter may get into the water. Hepatitis E does not cause chronic liver disease.\nPrecautions: stop alcohol consumption, rest, consult doctor, medication\nAverage Severity Score: 4.77"
+    },
+    {
+      "disease": "Hypertension",
+      "symptoms": [
+        "chest_pain",
+        "dizziness",
+        "headache",
+        "lack_of_concentration",
+        "loss_of_balance"
+      ],
+      "description": "Hypertension (HTN or HT), also known as high blood pressure (HBP), is a long-term medical condition in which the blood pressure in the arteries is persistently elevated. High blood pressure typically does not cause symptoms.",
+      "precautions": [
+        "meditation",
+        "salt baths",
+        "reduce stress",
+        "get proper sleep"
+      ],
+      "severity_score": 4.2,
+      "text": "Disease: Hypertension\nSymptoms: chest pain, dizziness, headache, lack of concentration, loss of balance\nDescription: Hypertension (HTN or HT), also known as high blood pressure (HBP), is a long-term medical condition in which the blood pressure in the arteries is persistently elevated. High blood pressure typically does not cause symptoms.\nPrecautions: meditation, salt baths, reduce stress, get proper sleep\nAverage Severity Score: 4.2"
+    },
+    {
+      "disease": "Hyperthyroidism",
+      "symptoms": [
+        "abnormal_menstruation",
+        "diarrhoea",
+        "excessive_hunger",
+        "fast_heart_rate",
+        "fatigue",
+        "irritability",
+        "mood_swings",
+        "muscle_weakness",
+        "restlessness",
+        "sweating",
+        "weight_loss"
+      ],
+      "description": "Hyperthyroidism (overactive thyroid) occurs when your thyroid gland produces too much of the hormone thyroxine. Hyperthyroidism can accelerate your body's metabolism, causing unintentional weight loss and a rapid or irregular heartbeat.",
+      "precautions": [
+        "eat healthy",
+        "massage",
+        "use lemon balm",
+        "take radioactive iodine treatment"
+      ],
+      "severity_score": 3.91,
+      "text": "Disease: Hyperthyroidism\nSymptoms: abnormal menstruation, diarrhoea, excessive hunger, fast heart rate, fatigue, irritability, mood swings, muscle weakness, restlessness, sweating, weight loss\nDescription: Hyperthyroidism (overactive thyroid) occurs when your thyroid gland produces too much of the hormone thyroxine. Hyperthyroidism can accelerate your body's metabolism, causing unintentional weight loss and a rapid or irregular heartbeat.\nPrecautions: eat healthy, massage, use lemon balm, take radioactive iodine treatment\nAverage Severity Score: 3.91"
+    },
+    {
+      "disease": "Hypoglycemia",
+      "symptoms": [
+        "anxiety",
+        "blurred_and_distorted_vision",
+        "drying_and_tingling_lips",
+        "excessive_hunger",
+        "fatigue",
+        "headache",
+        "irritability",
+        "nausea",
+        "palpitations",
+        "slurred_speech",
+        "sweating",
+        "vomiting"
+      ],
+      "description": "Hypoglycemia is a condition in which your blood sugar (glucose) level is lower than normal. Glucose is your body's main energy source. Hypoglycemia is often related to diabetes treatment. But other drugs and a variety of conditions — many rare — can cause low blood sugar in people who don't have diabetes.",
+      "precautions": [
+        "lie down on side",
+        "check in pulse",
+        "drink sugary drinks",
+        "consult doctor"
+      ],
+      "severity_score": 3.92,
+      "text": "Disease: Hypoglycemia\nSymptoms: anxiety, blurred and distorted vision, drying and tingling lips, excessive hunger, fatigue, headache, irritability, nausea, palpitations, slurred speech, sweating, vomiting\nDescription: Hypoglycemia is a condition in which your blood sugar (glucose) level is lower than normal. Glucose is your body's main energy source. Hypoglycemia is often related to diabetes treatment. But other drugs and a variety of conditions — many rare — can cause low blood sugar in people who don't have diabetes.\nPrecautions: lie down on side, check in pulse, drink sugary drinks, consult doctor\nAverage Severity Score: 3.92"
+    },
+    {
+      "disease": "Hypothyroidism",
+      "symptoms": [
+        "abnormal_menstruation",
+        "brittle_nails",
+        "cold_hands_and_feet",
+        "depression",
+        "dizziness",
+        "enlarged_thyroid",
+        "fatigue",
+        "irritability",
+        "lethargy",
+        "mood_swings",
+        "puffy_face_and_eyes",
+        "swollen_extremities",
+        "weight_gain"
+      ],
+      "description": "Hypothyroidism, also called underactive thyroid or low thyroid, is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone.",
+      "precautions": [
+        "reduce stress",
+        "exercise",
+        "eat healthy",
+        "get proper sleep"
+      ],
+      "severity_score": 4.08,
+      "text": "Disease: Hypothyroidism\nSymptoms: abnormal menstruation, brittle nails, cold hands and feet, depression, dizziness, enlarged thyroid, fatigue, irritability, lethargy, mood swings, puffy face and eyes, swollen extremities, weight gain\nDescription: Hypothyroidism, also called underactive thyroid or low thyroid, is a disorder of the endocrine system in which the thyroid gland does not produce enough thyroid hormone.\nPrecautions: reduce stress, exercise, eat healthy, get proper sleep\nAverage Severity Score: 4.08"
+    },
+    {
+      "disease": "Impetigo",
+      "symptoms": [
+        "blister",
+        "high_fever",
+        "red_sore_around_nose",
+        "skin_rash",
+        "yellow_crust_ooze"
+      ],
+      "description": "Impetigo (im-puh-TIE-go) is a common and highly contagious skin infection that mainly affects infants and children. Impetigo usually appears as red sores on the face, especially around a child's nose and mouth, and on hands and feet. The sores burst and develop honey-coloured crusts.",
+      "precautions": [
+        "soak affected area in warm water",
+        "use antibiotics",
+        "remove scabs with wet compressed cloth",
+        "consult doctor"
+      ],
+      "severity_score": 3.8,
+      "text": "Disease: Impetigo\nSymptoms: blister, high fever, red sore around nose, skin rash, yellow crust ooze\nDescription: Impetigo (im-puh-TIE-go) is a common and highly contagious skin infection that mainly affects infants and children. Impetigo usually appears as red sores on the face, especially around a child's nose and mouth, and on hands and feet. The sores burst and develop honey-coloured crusts.\nPrecautions: soak affected area in warm water, use antibiotics, remove scabs with wet compressed cloth, consult doctor\nAverage Severity Score: 3.8"
+    },
+    {
+      "disease": "Jaundice",
+      "symptoms": [
+        "abdominal_pain",
+        "dark_urine",
+        "fatigue",
+        "high_fever",
+        "itching",
+        "vomiting",
+        "weight_loss",
+        "yellowish_skin"
+      ],
+      "description": "Yellow staining of the skin and sclerae (the whites of the eyes) by abnormally high blood levels of the bile pigment bilirubin. The yellowing extends to other tissues and body fluids. Jaundice was once called the Morbus regius\" (the regal disease) in the belief that only the touch of a king could cure it\"",
+      "precautions": [
+        "drink plenty of water",
+        "consume milk thistle",
+        "eat fruits and high fibre food",
+        "medication"
+      ],
+      "severity_score": 3.88,
+      "text": "Disease: Jaundice\nSymptoms: abdominal pain, dark urine, fatigue, high fever, itching, vomiting, weight loss, yellowish skin\nDescription: Yellow staining of the skin and sclerae (the whites of the eyes) by abnormally high blood levels of the bile pigment bilirubin. The yellowing extends to other tissues and body fluids. Jaundice was once called the Morbus regius\" (the regal disease) in the belief that only the touch of a king could cure it\"\nPrecautions: drink plenty of water, consume milk thistle, eat fruits and high fibre food, medication\nAverage Severity Score: 3.88"
+    },
+    {
+      "disease": "Malaria",
+      "symptoms": [
+        "chills",
+        "diarrhoea",
+        "headache",
+        "high_fever",
+        "muscle_pain",
+        "nausea",
+        "sweating",
+        "vomiting"
+      ],
+      "description": "An infectious disease caused by protozoan parasites from the Plasmodium family that can be transmitted by the bite of the Anopheles mosquito or by a contaminated needle or transfusion. Falciparum malaria is the most deadly type.",
+      "precautions": [
+        "Consult nearest hospital",
+        "avoid oily food",
+        "avoid non veg food",
+        "keep mosquitos out"
+      ],
+      "severity_score": 4.25,
+      "text": "Disease: Malaria\nSymptoms: chills, diarrhoea, headache, high fever, muscle pain, nausea, sweating, vomiting\nDescription: An infectious disease caused by protozoan parasites from the Plasmodium family that can be transmitted by the bite of the Anopheles mosquito or by a contaminated needle or transfusion. Falciparum malaria is the most deadly type.\nPrecautions: Consult nearest hospital, avoid oily food, avoid non veg food, keep mosquitos out\nAverage Severity Score: 4.25"
+    },
+    {
+      "disease": "Migraine",
+      "symptoms": [
+        "acidity",
+        "blurred_and_distorted_vision",
+        "depression",
+        "excessive_hunger",
+        "headache",
+        "indigestion",
+        "irritability",
+        "stiff_neck",
+        "visual_disturbances"
+      ],
+      "description": "A migraine can cause severe throbbing pain or a pulsing sensation, usually on one side of the head. It's often accompanied by nausea, vomiting, and extreme sensitivity to light and sound. Migraine attacks can last for hours to days, and the pain can be so severe that it interferes with your daily activities.",
+      "precautions": [
+        "meditation",
+        "reduce stress",
+        "use polaroid glasses in sun",
+        "consult doctor"
+      ],
+      "severity_score": 3.56,
+      "text": "Disease: Migraine\nSymptoms: acidity, blurred and distorted vision, depression, excessive hunger, headache, indigestion, irritability, stiff neck, visual disturbances\nDescription: A migraine can cause severe throbbing pain or a pulsing sensation, usually on one side of the head. It's often accompanied by nausea, vomiting, and extreme sensitivity to light and sound. Migraine attacks can last for hours to days, and the pain can be so severe that it interferes with your daily activities.\nPrecautions: meditation, reduce stress, use polaroid glasses in sun, consult doctor\nAverage Severity Score: 3.56"
+    },
+    {
+      "disease": "Osteoarthritis",
+      "symptoms": [
+        "hip_joint_pain",
+        "joint_pain",
+        "knee_pain",
+        "neck_pain",
+        "painful_walking",
+        "swelling_joints"
+      ],
+      "description": "Osteoarthritis is the most common form of arthritis, affecting millions of people worldwide. It occurs when the protective cartilage that cushions the ends of your bones wears down over time.",
+      "precautions": [
+        "acetaminophen",
+        "consult nearest hospital",
+        "follow up",
+        "salt baths"
+      ],
+      "severity_score": 3.33,
+      "text": "Disease: Osteoarthritis\nSymptoms: hip joint pain, joint pain, knee pain, neck pain, painful walking, swelling joints\nDescription: Osteoarthritis is the most common form of arthritis, affecting millions of people worldwide. It occurs when the protective cartilage that cushions the ends of your bones wears down over time.\nPrecautions: acetaminophen, consult nearest hospital, follow up, salt baths\nAverage Severity Score: 3.33"
+    },
+    {
+      "disease": "Paralysis (brain hemorrhage)",
+      "symptoms": [
+        "altered_sensorium",
+        "headache",
+        "vomiting",
+        "weakness_of_one_body_side"
+      ],
+      "description": "No description available.",
+      "precautions": [
+        "massage",
+        "eat healthy",
+        "exercise",
+        "consult doctor"
+      ],
+      "severity_score": 3.5,
+      "text": "Disease: Paralysis (brain hemorrhage)\nSymptoms: altered sensorium, headache, vomiting, weakness of one body side\nDescription: No description available.\nPrecautions: massage, eat healthy, exercise, consult doctor\nAverage Severity Score: 3.5"
+    },
+    {
+      "disease": "Paroxysmal Positional Vertigo",
+      "symptoms": [
+        "headache",
+        "loss_of_balance",
+        "nausea",
+        "spinning_movements",
+        "unsteadiness",
+        "vomiting"
+      ],
+      "description": "Benign paroxysmal positional vertigo (BPPV) is one of the most common causes of vertigo — the sudden sensation that you're spinning or that the inside of your head is spinning. Benign paroxysmal positional vertigo causes brief episodes of mild to intense dizziness.",
+      "precautions": [
+        "lie down",
+        "avoid sudden changes in the body",
+        "avoid abrupt head movement",
+        "relax"
+      ],
+      "severity_score": 4.5,
+      "text": "Disease: Paroxysmal Positional Vertigo\nSymptoms: headache, loss of balance, nausea, spinning movements, unsteadiness, vomiting\nDescription: Benign paroxysmal positional vertigo (BPPV) is one of the most common causes of vertigo — the sudden sensation that you're spinning or that the inside of your head is spinning. Benign paroxysmal positional vertigo causes brief episodes of mild to intense dizziness.\nPrecautions: lie down, avoid sudden changes in the body, avoid abrupt head movement, relax\nAverage Severity Score: 4.5"
+    },
+    {
+      "disease": "Peptic ulcer disease",
+      "symptoms": [
+        "abdominal_pain",
+        "indigestion",
+        "internal_itching",
+        "loss_of_appetite",
+        "passage_of_gases",
+        "vomiting"
+      ],
+      "description": "Peptic ulcer disease (PUD) is a break in the inner lining of the stomach, the first part of the small intestine, or sometimes the lower oesophagus. An ulcer in the stomach is called a gastric ulcer, while one in the first part of the intestines is a duodenal ulcer.",
+      "precautions": [
+        "avoid fatty spicy food",
+        "consume probiotic food",
+        "eliminate milk",
+        "limit alcohol"
+      ],
+      "severity_score": 4.5,
+      "text": "Disease: Peptic ulcer disease\nSymptoms: abdominal pain, indigestion, internal itching, loss of appetite, passage of gases, vomiting\nDescription: Peptic ulcer disease (PUD) is a break in the inner lining of the stomach, the first part of the small intestine, or sometimes the lower oesophagus. An ulcer in the stomach is called a gastric ulcer, while one in the first part of the intestines is a duodenal ulcer.\nPrecautions: avoid fatty spicy food, consume probiotic food, eliminate milk, limit alcohol\nAverage Severity Score: 4.5"
+    },
+    {
+      "disease": "Pneumonia",
+      "symptoms": [
+        "breathlessness",
+        "chest_pain",
+        "chills",
+        "cough",
+        "fast_heart_rate",
+        "fatigue",
+        "high_fever",
+        "malaise",
+        "phlegm",
+        "rusty_sputum",
+        "sweating"
+      ],
+      "description": "Pneumonia is an infection in one or both lungs. Bacteria, viruses, and fungi cause it. The infection causes inflammation in the air sacs in your lungs, which are called alveoli. The alveoli fill with fluid or pus, making it difficult to breathe.",
+      "precautions": [
+        "consult doctor",
+        "medication",
+        "rest",
+        "follow up"
+      ],
+      "severity_score": 4.73,
+      "text": "Disease: Pneumonia\nSymptoms: breathlessness, chest pain, chills, cough, fast heart rate, fatigue, high fever, malaise, phlegm, rusty sputum, sweating\nDescription: Pneumonia is an infection in one or both lungs. Bacteria, viruses, and fungi cause it. The infection causes inflammation in the air sacs in your lungs, which are called alveoli. The alveoli fill with fluid or pus, making it difficult to breathe.\nPrecautions: consult doctor, medication, rest, follow up\nAverage Severity Score: 4.73"
+    },
+    {
+      "disease": "Psoriasis",
+      "symptoms": [
+        "inflammatory_nails",
+        "joint_pain",
+        "silver_like_dusting",
+        "skin_peeling",
+        "skin_rash",
+        "small_dents_in_nails"
+      ],
+      "description": "Psoriasis is a common skin disorder that forms thick, red, bumpy patches covered with silvery scales. They can pop up anywhere, but most appear on the scalp, elbows, knees, and lower back. Psoriasis can't be passed from person to person. It does sometimes happen in members of the same family.",
+      "precautions": [
+        "wash hands with warm soapy water",
+        "stop bleeding using pressure",
+        "consult doctor",
+        "salt baths"
+      ],
+      "severity_score": 2.5,
+      "text": "Disease: Psoriasis\nSymptoms: inflammatory nails, joint pain, silver like dusting, skin peeling, skin rash, small dents in nails\nDescription: Psoriasis is a common skin disorder that forms thick, red, bumpy patches covered with silvery scales. They can pop up anywhere, but most appear on the scalp, elbows, knees, and lower back. Psoriasis can't be passed from person to person. It does sometimes happen in members of the same family.\nPrecautions: wash hands with warm soapy water, stop bleeding using pressure, consult doctor, salt baths\nAverage Severity Score: 2.5"
+    },
+    {
+      "disease": "Tuberculosis",
+      "symptoms": [
+        "blood_in_sputum",
+        "breathlessness",
+        "chest_pain",
+        "chills",
+        "cough",
+        "fatigue",
+        "high_fever",
+        "loss_of_appetite",
+        "malaise",
+        "mild_fever",
+        "phlegm",
+        "sweating",
+        "swelled_lymph_nodes",
+        "vomiting",
+        "weight_loss",
+        "yellowing_of_eyes"
+      ],
+      "description": "Tuberculosis (TB) is an infectious disease usually caused by Mycobacterium tuberculosis (MTB) bacteria. Tuberculosis generally affects the lungs, but can also affect other parts of the body. Most infections show no symptoms, in which case it is known as latent tuberculosis.",
+      "precautions": [
+        "cover mouth",
+        "consult doctor",
+        "medication",
+        "rest"
+      ],
+      "severity_score": 4.69,
+      "text": "Disease: Tuberculosis\nSymptoms: blood in sputum, breathlessness, chest pain, chills, cough, fatigue, high fever, loss of appetite, malaise, mild fever, phlegm, sweating, swelled lymph nodes, vomiting, weight loss, yellowing of eyes\nDescription: Tuberculosis (TB) is an infectious disease usually caused by Mycobacterium tuberculosis (MTB) bacteria. Tuberculosis generally affects the lungs, but can also affect other parts of the body. Most infections show no symptoms, in which case it is known as latent tuberculosis.\nPrecautions: cover mouth, consult doctor, medication, rest\nAverage Severity Score: 4.69"
+    },
+    {
+      "disease": "Typhoid",
+      "symptoms": [
+        "abdominal_pain",
+        "belly_pain",
+        "chills",
+        "constipation",
+        "diarrhoea",
+        "fatigue",
+        "headache",
+        "high_fever",
+        "nausea",
+        "toxic_look_(typhus)",
+        "vomiting"
+      ],
+      "description": "An acute illness characterized by fever caused by infection with the bacterium Salmonella typhi. Typhoid fever has an insidious onset, with fever, headache, constipation, malaise, chills, and muscle pain. Diarrhoea is uncommon, and vomiting is not usually severe.",
+      "precautions": [
+        "eat high calorie vegitables",
+        "antiboitic therapy",
+        "consult doctor",
+        "medication"
+      ],
+      "severity_score": 4.55,
+      "text": "Disease: Typhoid\nSymptoms: abdominal pain, belly pain, chills, constipation, diarrhoea, fatigue, headache, high fever, nausea, toxic look (typhus), vomiting\nDescription: An acute illness characterized by fever caused by infection with the bacterium Salmonella typhi. Typhoid fever has an insidious onset, with fever, headache, constipation, malaise, chills, and muscle pain. Diarrhoea is uncommon, and vomiting is not usually severe.\nPrecautions: eat high calorie vegitables, antiboitic therapy, consult doctor, medication\nAverage Severity Score: 4.55"
+    },
+    {
+      "disease": "Urinary tract infection",
+      "symptoms": [
+        "bladder_discomfort",
+        "burning_micturition",
+        "continuous_feel_of_urine",
+        "foul_smell_of urine"
+      ],
+      "description": "Urinary tract infection: An infection of the kidney, ureter, bladder, or urethra. Abbreviated UTI. Not everyone with a UTI has symptoms, but common symptoms include a frequent urge to urinate and pain or burning when urinating.",
+      "precautions": [
+        "drink plenty of water",
+        "increase vitamin c intake",
+        "drink cranberry juice",
+        "take probiotics"
+      ],
+      "severity_score": 5.25,
+      "text": "Disease: Urinary tract infection\nSymptoms: bladder discomfort, burning micturition, continuous feel of urine, foul smell of urine\nDescription: Urinary tract infection: An infection of the kidney, ureter, bladder, or urethra. Abbreviated UTI. Not everyone with a UTI has symptoms, but common symptoms include a frequent urge to urinate and pain or burning when urinating.\nPrecautions: drink plenty of water, increase vitamin c intake, drink cranberry juice, take probiotics\nAverage Severity Score: 5.25"
+    },
+    {
+      "disease": "Varicose veins",
+      "symptoms": [
+        "bruising",
+        "cramps",
+        "fatigue",
+        "obesity",
+        "prominent_veins_on_calf",
+        "swollen_blood_vessels",
+        "swollen_legs"
+      ],
+      "description": "A vein that has enlarged and twisted, often appearing as a bulging, blue blood vessel that is clearly visible through the skin. Varicose veins are most common in older adults, particularly women, and occur especially on the legs.",
+      "precautions": [
+        "lie down flat and raise the leg high",
+        "use ointments",
+        "use vein compression",
+        "don't stand still for long"
+      ],
+      "severity_score": 4.57,
+      "text": "Disease: Varicose veins\nSymptoms: bruising, cramps, fatigue, obesity, prominent veins on calf, swollen blood vessels, swollen legs\nDescription: A vein that has enlarged and twisted, often appearing as a bulging, blue blood vessel that is clearly visible through the skin. Varicose veins are most common in older adults, particularly women, and occur especially on the legs.\nPrecautions: lie down flat and raise the leg high, use ointments, use vein compression, don't stand still for long\nAverage Severity Score: 4.57"
+    }
+  ]
+}
