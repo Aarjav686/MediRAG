@@ -1,240 +1,227 @@
-import streamlit as st
-import pandas as pd
-import sys
-import os
+"""
+MediRAG - Flask Web Application
+Replaces the Streamlit UI with a premium HTML/CSS/JS interface.
+"""
 
-# Add project root to path so we can import src modules
+import os
+import sys
+import csv
+import json
+from datetime import datetime
+from flask import Flask, render_template, request, jsonify
+import io
+
+# Add project root to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.rag_pipeline import RAGPipeline
 from src.preprocessing import get_all_symptoms
 from src.llm import MEDICAL_DISCLAIMER
-from datetime import datetime
-import csv
 
-# Configure Streamlit page
-st.set_page_config(
-    page_title="Symptom-to-Disease AI Assistant",
-    page_icon="🏥",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+app = Flask(__name__)
+app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024  # 16 MB max upload
 
-# Custom CSS for styling and risk level colors
-st.markdown("""
-<style>
-    .risk-Low { color: #2e7d32; font-weight: bold; }
-    .risk-Moderate { color: #f57c00; font-weight: bold; }
-    .risk-High { color: #d32f2f; font-weight: bold; }
-    .risk-Critical { color: #b71c1c; font-weight: bold; text-decoration: underline; }
-    
-    .disease-card {
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border: 1px solid #e0e0e0;
-        margin-bottom: 1rem;
-        background-color: #f8f9fa;
-    }
-    
-    .disclaimer-footer {
-        margin-top: 3rem;
-        padding: 1rem;
-        font-size: 0.8rem;
-        color: #666;
-        border-top: 1px solid #eee;
-        text-align: center;
-    }
-</style>
-""", unsafe_allow_html=True)
+# ---------------------------------------------------------------------------
+# Pipeline singleton (lazy-loaded once)
+# ---------------------------------------------------------------------------
+_pipeline = None
 
-# -----------------------------------------------------------------------------
-# Caching the Pipeline
-# -----------------------------------------------------------------------------
-@st.cache_resource(show_spinner="Loading AI Models (this may take a moment)...")
-def load_medirag_pipeline(use_llm: bool = False):
+
+def get_pipeline(use_llm: bool = False) -> RAGPipeline:
+    global _pipeline
+    if _pipeline is None:
+        _pipeline = RAGPipeline(use_llm=use_llm)
+    return _pipeline
+
+
+# ---------------------------------------------------------------------------
+# Routes
+# ---------------------------------------------------------------------------
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/api/symptoms", methods=["GET"])
+def api_symptoms():
+    """Return the list of all supported symptoms."""
+    try:
+        symptoms = get_all_symptoms()
+        formatted = [s.replace("_", " ") for s in symptoms]
+        return jsonify({"symptoms": formatted})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/status", methods=["GET"])
+def api_status():
+    """Return system status information."""
+    try:
+        pipeline = get_pipeline()
+        info = pipeline.get_system_info()
+        return jsonify(info)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/analyze", methods=["POST"])
+def api_analyze():
+    """Analyze symptoms and return disease predictions."""
+    data = request.get_json(force=True)
+    user_input = data.get("symptoms", "").strip()
+    use_llm = data.get("use_llm", False)
+
+    if not user_input:
+        return jsonify({"error": "Please enter some symptoms."}), 400
+
+    try:
+        pipeline = get_pipeline(use_llm=use_llm)
+        result = pipeline.analyze_symptoms(user_input)
+
+        predictions = result.get("predictions", [])
+        risk_level = result.get("risk_level", "Unknown")
+        explanation = result.get("explanation", "")
+
+        # Log query
+        log_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "logs")
+        os.makedirs(log_dir, exist_ok=True)
+        log_file = os.path.join(log_dir, "query_log.csv")
+        log_exists = os.path.exists(log_file)
+        top_disease = predictions[0]["disease"] if predictions else "Unknown"
+        top_confidence = predictions[0]["confidence"] if predictions else 0.0
+
+        with open(log_file, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not log_exists:
+                writer.writerow(["Timestamp", "User Input", "Top Prediction", "Confidence", "Risk Level"])
+            writer.writerow([
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                user_input,
+                top_disease,
+                f"{top_confidence:.4f}",
+                risk_level,
+            ])
+
+        return jsonify({
+            "predictions": predictions,
+            "risk_level": risk_level,
+            "explanation": explanation,
+            "disclaimer": MEDICAL_DISCLAIMER,
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
+# ---------------------------------------------------------------------------
+# PDF Upload
+# ---------------------------------------------------------------------------
+
+@app.route("/api/upload-pdf", methods=["POST"])
+def api_upload_pdf():
     """
-    Load the RAG pipeline. Cached so models don't reload on every interaction.
+    Extract text from an uploaded PDF.
+    Strategy:
+      1. Try PyPDF2 text extraction (fast, digital PDFs).
+      2. If no text found, render pages with PyMuPDF and run EasyOCR (scanned PDFs).
+    Returns extracted text, page count, filename, and extraction method used.
     """
-    return RAGPipeline(use_llm=use_llm)
+    if "pdf" not in request.files:
+        return jsonify({"error": "No file uploaded."}), 400
 
-@st.cache_data
-def load_symptoms_list():
-    """Load the list of valid symptoms from the dataset."""
-    return get_all_symptoms()
+    pdf_file = request.files["pdf"]
+    if not pdf_file.filename or not pdf_file.filename.lower().endswith(".pdf"):
+        return jsonify({"error": "Please upload a valid PDF file."}), 400
 
-# -----------------------------------------------------------------------------
-# Sidebar Configuration
-# -----------------------------------------------------------------------------
-with st.sidebar:
-    st.image("https://cdn-icons-png.flaticon.com/512/2966/2966327.png", width=80)
-    st.title("MediRAG Settings")
-    
-    st.markdown("### Settings")
-    use_llm_toggle = st.checkbox(
-        "Enable TinyLlama LLM", 
-        value=False,
-        help="If checked, uses the AI model for explanations. Otherwise, uses a faster template."
-    )
-    
-    st.markdown("---")
-    
-    # Load pipeline based on toggle
-    pipeline = load_medirag_pipeline(use_llm=use_llm_toggle)
-    system_info = pipeline.get_system_info()
-    
-    st.markdown("### System Status")
-    st.write(f"- **Mode:** {system_info['llm']['mode']}")
-    st.write(f"- **Documents Index:** {system_info['retriever']['num_documents']} diseases")
-    
-    st.markdown("---")
-    
-    st.markdown("### Common Symptoms")
-    st.markdown("Use these terms for better results:")
-    
-    symptoms_list = load_symptoms_list()
-    if symptoms_list:
-        with st.expander("View Supported Symptoms"):
-            # Show a sample or formatted list
-            formatted_list = ", ".join([s.replace("_", " ") for s in symptoms_list])
-            st.write(formatted_list)
+    pdf_bytes = pdf_file.read()
+    filename = pdf_file.filename
+    num_pages = 0
 
-# -----------------------------------------------------------------------------
-# Main Application Layout
-# -----------------------------------------------------------------------------
-st.title("🏥 Symptom-to-Disease AI Assistant")
-st.markdown("""
-Welcome to **MediRAG**, an AI-powered medical knowledge assistant. 
-Please describe your symptoms below, separated by commas (e.g., _"high fever, severe headache, joint pain"_).
-""")
+    # ── Stage 1: PyPDF2 text extraction ─────────────────────────
+    try:
+        import PyPDF2
+        reader = PyPDF2.PdfReader(io.BytesIO(pdf_bytes))
+        num_pages = len(reader.pages)
+        pages_text = []
+        for page in reader.pages:
+            text = page.extract_text()
+            if text and text.strip():
+                pages_text.append(text.strip())
 
-# User input
-user_input = st.text_area("Describe your symptoms:", height=100, 
-                          placeholder="e.g., fever, headache, joint pain, muscle pain")
+        full_text = "\n\n".join(pages_text).strip()
+        if full_text:
+            return jsonify({
+                "text": full_text,
+                "pages": num_pages,
+                "filename": filename,
+                "method": "text",          # digital PDF — fast extraction
+            })
+    except Exception as e:
+        print(f"[PDF] PyPDF2 error: {e}")
 
-analyze_button = st.button("Analyze Symptoms", type="primary", use_container_width=True)
+    # ── Stage 2: OCR via PyMuPDF + EasyOCR ──────────────────────
+    try:
+        import fitz                        # PyMuPDF
+        import easyocr
+        import numpy as np
 
-# -----------------------------------------------------------------------------
-# Analysis and Results
-# -----------------------------------------------------------------------------
-if analyze_button:
-    if not user_input.strip():
-        st.warning("Please enter some symptoms before analyzing.")
-    else:
-        with st.spinner("Analyzing symptoms and searching medical knowledge base..."):
-            # Run the pipeline
-            result = pipeline.analyze_symptoms(user_input)
-            
-            predictions = result.get("predictions", [])
-            risk_level = result.get("risk_level", "Unknown")
-            explanation = result.get("explanation", "")
-            
-            # --- Query Logging (Commit 19) ---
-            os.makedirs("logs", exist_ok=True)
-            log_file = os.path.join("logs", "query_log.csv")
-            log_exists = os.path.exists(log_file)
-            top_disease = predictions[0]['disease'] if predictions else "Unknown"
-            top_confidence = predictions[0]['confidence'] if predictions else 0.0
-            
-            with open(log_file, "a", newline="", encoding="utf-8") as f:
-                writer = csv.writer(f)
-                if not log_exists:
-                    writer.writerow(["Timestamp", "User Input", "Top Prediction", "Confidence", "Risk Level"])
-                writer.writerow([
-                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    user_input,
-                    top_disease,
-                    f"{top_confidence:.4f}",
-                    risk_level
-                ])
-            # ---------------------------------
-            
-            st.markdown("---")
-            st.header("Analysis Results")
-            
-            # 1. Overall Risk Level
-            risk_color_map = {
-                "Low": "success",
-                "Moderate": "warning",
-                "High": "error",
-                "Critical": "error",
-                "Unknown": "info"
-            }
-            
-            # Display risk alert
-            if risk_level == "Critical":
-                st.error(f"🚨 **Overall Risk Level: CRITICAL** - Immediate medical attention is highly recommended.")
-            elif risk_level == "High":
-                st.error(f"⚠️ **Overall Risk Level: High** - Please consult a doctor soon.")
-            elif risk_level == "Moderate":
-                st.warning(f"🔔 **Overall Risk Level: Moderate** - Monitor symptoms and consider a medical checkup.")
-            elif risk_level == "Low":
-                st.success(f"✅ **Overall Risk Level: Low** - Symptoms indicate a lower risk, but consult a doctor if they persist.")
-            
-            # 2. AI Explanation
-            st.markdown("### AI Summary")
-            st.info(explanation)
-            
-            # 3. Top Predictions
-            if predictions:
-                st.markdown("### Top Disease Predictions")
-                
-                # Create tabs for the top predictions
-                tabs = st.tabs([f"#{i+1}: {p['disease']}" for i, p in enumerate(predictions)])
-                
-                for i, (tab, pred) in enumerate(zip(tabs, predictions)):
-                    with tab:
-                        st.markdown(f"<div class='disease-card'>", unsafe_allow_html=True)
-                        
-                        col1, col2 = st.columns([2, 1])
-                        with col1:
-                            st.subheader(pred['disease'])
-                            st.write(pred.get('description', 'No description available.'))
-                        
-                        with col2:
-                            confidence = pred.get('confidence', 0)
-                            st.metric("Confidence Score", f"{confidence:.0%}")
-                            st.progress(confidence)
-                            
-                            p_risk = pred.get('risk_level', 'Unknown')
-                            st.markdown(f"**Risk Level:** <span class='risk-{p_risk}'>{p_risk}</span>", unsafe_allow_html=True)
-                        
-                        st.markdown("#### Matched Symptoms:")
-                        matched_symptoms = pred.get('symptoms', [])
-                        if matched_symptoms:
-                            # Format nicely
-                            symp_text = ", ".join([s.replace("_", " ").title() for s in matched_symptoms[:10]])
-                            st.write(symp_text)
-                        
-                        st.markdown("#### Recommended Precautions:")
-                        precautions = pred.get('precautions', [])
-                        if precautions:
-                            for p in precautions:
-                                st.write(f"- {p.capitalize()}")
-                        else:
-                            st.write("No specific precautions listed.")
-                            
-                        st.markdown("</div>", unsafe_allow_html=True)
-                
-                # --- Disease Comparison Table (Commit 18) ---
-                st.markdown("### Disease Comparison")
-                st.write("Side-by-side comparison of the top potential matches:")
-                
-                comparison_data = []
-                for p in predictions:
-                    matched_symp = [s.replace("_", " ").title() for s in p.get("symptoms", [])]
-                    comparison_data.append({
-                        "Condition": p["disease"],
-                        "Confidence (%)": f"{p.get('confidence', 0) * 100:.1f}%",
-                        "Risk Level": p.get("risk_level", "Unknown"),
-                        "Severity Score": p.get("severity_score", 0),
-                        "Overlapping Symptoms": ", ".join(matched_symp[:5]) + ("..." if len(matched_symp) > 5 else "")
-                    })
-                
-                df_comparison = pd.DataFrame(comparison_data)
-                # Display without index
-                st.dataframe(df_comparison, use_container_width=True, hide_index=True)
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+        num_pages = len(doc)
 
-# -----------------------------------------------------------------------------
-# Footer / Disclaimer
-# -----------------------------------------------------------------------------
-st.markdown(f"<div class='disclaimer-footer'>{MEDICAL_DISCLAIMER}</div>", unsafe_allow_html=True)
+        # Lazy-load EasyOCR reader (cached on app context)
+        if not hasattr(app, "_ocr_reader"):
+            print("[OCR] Loading EasyOCR model (first time, may take ~30s)…")
+            app._ocr_reader = easyocr.Reader(["en"], gpu=False, verbose=False)
+            print("[OCR] EasyOCR ready.")
+
+        reader = app._ocr_reader
+        ocr_texts = []
+
+        for page_num in range(num_pages):
+            page = doc[page_num]
+            # Render at 2× resolution for better OCR accuracy
+            mat = fitz.Matrix(2.0, 2.0)
+            pix = page.get_pixmap(matrix=mat, alpha=False)
+            # Convert pixmap to numpy RGB array without saving to disk
+            img_array = np.frombuffer(pix.samples, dtype=np.uint8).reshape(
+                pix.height, pix.width, 3
+            )
+            results = reader.readtext(img_array, detail=0, paragraph=True)
+            page_text = " ".join(results).strip()
+            if page_text:
+                ocr_texts.append(page_text)
+
+        doc.close()
+        full_text = "\n\n".join(ocr_texts).strip()
+
+        if not full_text:
+            return jsonify({
+                "error": "OCR could not extract any text from this PDF. "
+                         "The document may be image-only or too low quality."
+            }), 422
+
+        return jsonify({
+            "text": full_text,
+            "pages": num_pages,
+            "filename": filename,
+            "method": "ocr",              # scanned PDF — OCR used
+        })
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to process PDF: {str(e)}"}), 500
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+if __name__ == "__main__":
+    # Pre-load pipeline on startup
+    print("Pre-loading MediRAG pipeline...")
+    get_pipeline(use_llm=False)
+    app.run(debug=True, host="0.0.0.0", port=5050)

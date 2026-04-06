@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediRAG – AI Symptom Analysis</title>
+  <meta name="description"
+    content="MediRAG is an AI-powered medical knowledge assistant that analyzes your symptoms and suggests possible conditions using Retrieval-Augmented Generation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body>
+
+  <!-- ───────────────── HEADER ───────────────── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container">
+      <a href="/" class="brand" id="brand-logo">
+        <span class="brand-icon">🏥</span>
+        <span class="brand-name">Medi<span class="accent">RAG</span></span>
+      </a>
+      <nav class="header-nav" id="header-nav">
+        <span class="nav-pill" id="status-pill">
+          <span class="status-dot"></span>
+          <span id="status-text">Loading…</span>
+        </span>
+        <button class="btn-ghost" id="toggle-sidebar-btn" aria-label="Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+          Settings
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ───────────────── SIDEBAR ───────────────── -->
+  <aside class="sidebar" id="sidebar" aria-hidden="true">
+    <div class="sidebar-inner">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Settings</h2>
+        <button class="sidebar-close" id="sidebar-close-btn" aria-label="Close sidebar">✕</button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">AI Mode</h3>
+        <label class="toggle-label" for="llm-toggle">
+          <div class="toggle-switch">
+            <input type="checkbox" id="llm-toggle" role="switch" />
+            <span class="slider"></span>
+          </div>
+          <div class="toggle-info">
+            <span class="toggle-name">Enable TinyLlama LLM</span>
+            <span class="toggle-desc">Uses local AI for richer explanations (slower)</span>
+          </div>
+        </label>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">System Status</h3>
+        <div class="info-card" id="system-status-card">
+          <div class="info-row">
+            <span class="info-label">Mode</span>
+            <span class="info-value" id="sys-mode">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Diseases Indexed</span>
+            <span class="info-value" id="sys-docs">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-section-title">Supported Symptoms</h3>
+        <p class="sidebar-hint">Type these terms for best results:</p>
+        <div class="symptom-tags" id="symptom-tags-container">
+          <span class="tag skeleton-tag"></span>
+          <span class="tag skeleton-tag"></span>
+          <span class="tag skeleton-tag"></span>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ───────────────── HERO ───────────────── -->
+  <main class="main-wrap" id="main-content">
+    <section class="hero" id="hero-section">
+      <div class="hero-badge">
+        <span>✨ AI-Powered Medical Assistant</span>
+      </div>
+      <h1 class="hero-title">Understand Your Symptoms<br /><span class="gradient-text">Instantly & Accurately</span>
+      </h1>
+      <p class="hero-subtitle">
+        Describe what you're feeling and MediRAG's retrieval-augmented AI will surface the most likely conditions, risk
+        levels, and recommended precautions — all from a verified medical knowledge base.
+      </p>
+
+      <!-- Input Card -->
+      <div class="input-card" id="input-card">
+        <div class="input-card-header">
+          <span class="input-card-icon">🩺</span>
+          <span class="input-card-label">Symptom Analysis</span>
+        </div>
+        <div class="input-group">
+          <textarea id="symptoms-input" class="symptom-textarea" rows="3"
+            placeholder="e.g., fever, severe headache, joint pain, muscle aches…" aria-label="Enter your symptoms"
+            spellcheck="false"></textarea>
+          <div class="char-hint" id="char-hint">Separate symptoms with commas</div>
+        </div>
+        <button class="btn-analyze" id="analyze-btn" aria-label="Analyze symptoms" disabled>
+          <span class="btn-label">Analyze Symptoms</span>
+          <span class="btn-arrow">→</span>
+        </button>
+        <div class="quick-chips" id="quick-chips">
+          <span class="chips-label">Quick add:</span>
+          <button class="chip" data-symptom="fever">fever</button>
+          <button class="chip" data-symptom="headache">headache</button>
+          <button class="chip" data-symptom="cough">cough</button>
+          <button class="chip" data-symptom="fatigue">fatigue</button>
+          <button class="chip" data-symptom="nausea">nausea</button>
+          <button class="chip" data-symptom="joint pain">joint pain</button>
+          <button class="chip" data-symptom="skin rash">skin rash</button>
+        </div>
+
+        <!-- PDF Upload -->
+        <div class="pdf-divider">
+          <span class="pdf-divider-line"></span>
+          <span class="pdf-divider-text">or import from PDF</span>
+          <span class="pdf-divider-line"></span>
+        </div>
+
+        <div class="pdf-drop-zone" id="pdf-drop-zone" role="button" tabindex="0" aria-label="Upload PDF report">
+          <input type="file" id="pdf-file-input" accept=".pdf" hidden />
+          <div class="pdf-drop-idle" id="pdf-drop-idle">
+            <div class="pdf-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" class="pdf-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+                <polyline points="10 9 9 9 8 9" />
+              </svg>
+            </div>
+            <div class="pdf-drop-text">
+              <span class="pdf-drop-primary">Drop your medical report here</span>
+              <span class="pdf-drop-secondary">or <button class="pdf-browse-btn" id="pdf-browse-btn"
+                  type="button">browse file</button> · PDF up to 16 MB</span>
+            </div>
+          </div>
+          <div class="pdf-drop-loading hidden" id="pdf-drop-loading">
+            <div class="pdf-spinner"></div>
+            <div class="pdf-loading-content">
+              <span class="pdf-loading-msg">Extracting text from PDF…</span>
+              <span class="pdf-loading-sub">Scanned documents may use OCR — please wait</span>
+            </div>
+          </div>
+          <div class="pdf-drop-success hidden" id="pdf-drop-success">
+            <span class="pdf-success-icon">✅</span>
+            <div class="pdf-success-info">
+              <span class="pdf-success-name" id="pdf-success-name"></span>
+              <span class="pdf-success-meta" id="pdf-success-meta"></span>
+            </div>
+            <button class="pdf-clear-btn" id="pdf-clear-btn" type="button" aria-label="Remove PDF">✕</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────── LOADER ───────────────── -->
+    <section class="loader-section hidden" id="loader-section" aria-live="polite">
+      <div class="loader-card">
+        <div class="pulse-ring">
+          <div class="pulse-core"></div>
+        </div>
+        <p class="loader-text">Analyzing symptoms…</p>
+        <p class="loader-subtext">Searching medical knowledge base</p>
+      </div>
+    </section>
+
+    <!-- ───────────────── RESULTS ───────────────── -->
+    <section class="results-section hidden" id="results-section" aria-live="polite">
+      <div class="container">
+
+        <!-- Risk Banner -->
+        <div class="risk-banner" id="risk-banner">
+          <div class="risk-icon" id="risk-icon">✅</div>
+          <div class="risk-info">
+            <div class="risk-label">Overall Risk Level</div>
+            <div class="risk-value" id="risk-value">Low</div>
+          </div>
+          <div class="risk-desc" id="risk-desc"></div>
+        </div>
+
+        <!-- AI Summary -->
+        <div class="result-block" id="summary-block">
+          <div class="result-block-header">
+            <span class="rb-icon">🤖</span>
+            <h2 class="rb-title">AI Summary</h2>
+          </div>
+          <div class="summary-text" id="summary-text"></div>
+        </div>
+
+        <!-- Disease Predictions -->
+        <div class="result-block" id="predictions-block">
+          <div class="result-block-header">
+            <span class="rb-icon">📋</span>
+            <h2 class="rb-title">Top Disease Predictions</h2>
+          </div>
+
+          <!-- Prediction Tabs -->
+          <div class="pred-tabs" id="pred-tabs" role="tablist"></div>
+          <div class="pred-panels" id="pred-panels"></div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="result-block" id="comparison-block">
+          <div class="result-block-header">
+            <span class="rb-icon">📊</span>
+            <h2 class="rb-title">Disease Comparison</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="comparison-table" id="comparison-table">
+              <thead>
+                <tr>
+                  <th>Condition</th>
+                  <th>Confidence</th>
+                  <th>Risk Level</th>
+                  <th>Severity Score</th>
+                  <th>Key Symptoms</th>
+                </tr>
+              </thead>
+              <tbody id="comparison-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- New Analysis -->
+        <div class="new-analysis-wrap">
+          <button class="btn-outline" id="new-analysis-btn">← New Analysis</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────── DISCLAIMER ───────────────── -->
+    <footer class="disclaimer-footer" id="disclaimer-footer">
+      <div class="container">
+        <p id="disclaimer-text">⚕️ DISCLAIMER: This is an AI-powered educational tool only. It is NOT a substitute for
+          professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for
+          medical concerns.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="/static/js/main.js"></script>
+</body>
+
+</html>
