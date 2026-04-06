@@ -889,10 +889,11 @@ body {
   align-items: center;
   justify-content: center;
   gap: .75rem;
-  font-size: .85rem;
-  color: var(--slate-500);
   min-height: 48px;
 }
+.pdf-loading-content { display: flex; flex-direction: column; gap: .15rem; }
+.pdf-loading-msg { font-size: .85rem; color: var(--slate-600); font-weight: 500; transition: color .2s; }
+.pdf-loading-sub { font-size: .72rem; color: var(--slate-400); }
 .pdf-spinner {
   width: 18px; height: 18px;
   border: 2px solid var(--slate-200);
