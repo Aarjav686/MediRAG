@@ -335,12 +335,16 @@ const pdfSuccessName = el("pdf-success-name");
 const pdfSuccessMeta = el("pdf-success-meta");
 const pdfClearBtn    = el("pdf-clear-btn");
 
-function setPdfState(state) {
+function setPdfState(state, loadingMsg) {
   pdfDropIdle.classList.add("hidden");
   pdfDropLoading.classList.add("hidden");
   pdfDropSuccess.classList.add("hidden");
   if (state === "idle")    pdfDropIdle.classList.remove("hidden");
-  if (state === "loading") pdfDropLoading.classList.remove("hidden");
+  if (state === "loading") {
+    pdfDropLoading.classList.remove("hidden");
+    const msgEl = pdfDropLoading.querySelector(".pdf-loading-msg");
+    if (msgEl && loadingMsg) msgEl.textContent = loadingMsg;
+  }
   if (state === "success") pdfDropSuccess.classList.remove("hidden");
 }
 
@@ -349,13 +353,19 @@ async function uploadPdf(file) {
     alert("Please select a valid PDF file.");
     return;
   }
-  setPdfState("loading");
+  setPdfState("loading", "Extracting text from PDF…");
+
+  // After 3s with no response, hint that OCR may be running
+  const ocrHintTimer = setTimeout(() => {
+    setPdfState("loading", "Running OCR on scanned pages… this may take up to 60s");
+  }, 3000);
 
   const formData = new FormData();
   formData.append("pdf", file);
 
   try {
     const resp = await fetch("/api/upload-pdf", { method: "POST", body: formData });
+    clearTimeout(ocrHintTimer);
     const data = await resp.json();
 
     if (!resp.ok || data.error) {
@@ -368,11 +378,15 @@ async function uploadPdf(file) {
     symptomsInput.value = data.text;
     symptomsInput.dispatchEvent(new Event("input"));
 
-    // Show success state
+    // Show success state with method badge
+    const isOCR = data.method === "ocr";
     pdfSuccessName.textContent = data.filename;
-    pdfSuccessMeta.textContent = `${data.pages} page${data.pages !== 1 ? "s" : ""} · text extracted`;
+    pdfSuccessMeta.textContent =
+      `${data.pages} page${data.pages !== 1 ? "s" : ""} · ` +
+      (isOCR ? "🔍 OCR extracted" : "⚡ text extracted");
     setPdfState("success");
   } catch (err) {
+    clearTimeout(ocrHintTimer);
     console.error(err);
     alert("Could not connect to server for PDF parsing.");
     setPdfState("idle");
